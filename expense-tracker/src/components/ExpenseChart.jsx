@@ -15,7 +15,18 @@ const ExpenseChart = ({ expenses }) => {
     datasets: [
       {
         data: Object.values(categories),
-        backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#a65df3"],
+        backgroundColor: [
+          "#FF9AA2",
+          "#77DD77",
+          "#B39EB5",
+          "#89CFF0",
+          "#FFB347",
+          "#FF6F61",
+          "#FFEEAD",
+          "#A8E6CF",
+          "#C3B1E1",
+          "#77B5FE",
+        ],
       },
     ],
   };

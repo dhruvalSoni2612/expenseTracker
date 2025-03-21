@@ -6,6 +6,19 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import ExpenseChart from "./ExpenseChart";
 
+const categories = [
+  { id: 1, name: "Food & Dining", icon: "🍔" },
+  { id: 2, name: "Transportation", icon: "🚗" },
+  { id: 3, name: "Housing", icon: "🏠" },
+  { id: 4, name: "Health & Fitness", icon: "💊" },
+  { id: 5, name: "Entertainment", icon: "🎬" },
+  { id: 6, name: "Shopping", icon: "🛍️" },
+  { id: 7, name: "Travel", icon: "✈️" },
+  { id: 8, name: "Education", icon: "📚" },
+  { id: 9, name: "Personal Care", icon: "💇" },
+  { id: 10, name: "Miscellaneous", icon: "🎁" },
+];
+
 const formatDate = (dateString) => {
   const date = new Date(dateString);
   const day = String(date.getDate()).padStart(2, "0");
@@ -17,11 +30,10 @@ const formatDate = (dateString) => {
 const ExpenseList = () => {
   const expenses = useSelector((state) => state.expenses.expenses || []);
   const dispatch = useDispatch();
-  const [editingId, setEditingId] = useState();
-  const [editedAmount, setEditedAmount] = useState();
-  const [editedTitle, setEditedTitle] = useState();
-
-  const [editedCategory, setEditedCategory] = useState();
+  const [editingId, setEditingId] = useState("null");
+  const [editedAmount, setEditedAmount] = useState("");
+  const [editedTitle, setEditedTitle] = useState("");
+  const [editedCategory, setEditedCategory] = useState("");
 
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -95,9 +107,11 @@ const ExpenseList = () => {
                 onChange={(e) => setEditedCategory(e.target.value)}
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               >
-                <option value="Food">Food</option>
-                <option value="Travel">Travel</option>
-                <option value="Bills">Bills</option>
+                {categories.map((categorie) => (
+                  <option key={categorie.id} value={categorie.name}>
+                    {categorie.icon} {categorie.name}
+                  </option>
+                ))}
               </select>
               <button
                 onClick={handleSave}

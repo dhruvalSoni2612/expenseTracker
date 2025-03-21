@@ -4,10 +4,23 @@ import { addExpense } from "../features/expensesSlice";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
+const categories = [
+  { id: 1, name: "Food & Dining", icon: "🍔" },
+  { id: 2, name: "Transportation", icon: "🚗" },
+  { id: 3, name: "Housing", icon: "🏠" },
+  { id: 4, name: "Health & Fitness", icon: "💊" },
+  { id: 5, name: "Entertainment", icon: "🎬" },
+  { id: 6, name: "Shopping", icon: "🛍️" },
+  { id: 7, name: "Travel", icon: "✈️" },
+  { id: 8, name: "Education", icon: "📚" },
+  { id: 9, name: "Personal Care", icon: "💇" },
+  { id: 10, name: "Miscellaneous", icon: "🎁" },
+];
+
 const AddExpenseForm = () => {
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
-  const [category, setCategory] = useState("Food");
+  const [category, setCategory] = useState("categories[0].name");
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
@@ -74,10 +87,11 @@ const AddExpenseForm = () => {
             onChange={(e) => setCategory(e.target.value)}
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           >
-            <option value="Food">Food</option>
-            <option value="Travel">Travel</option>
-            <option value="Entertainment">Entertainment</option>
-            <option value="Bill">Bills</option>
+            {categories.map((catagorie) => (
+              <option key={catagorie.id} value={catagorie.name}>
+                {catagorie.icon} {catagorie.name}
+              </option>
+            ))}
           </select>
         </div>
         <button
